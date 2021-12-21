@@ -21,20 +21,38 @@
             $('[data-toggle="tooltip"]').tooltip();   
         });
     </script>
+    <script>
+function searchClient(str) {
+  if (str == "") {
+    document.getElementById("txtHint").innerHTML = "search query empty";
+    return;
+  } else {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("txtHint").innerHTML = this.responseText;
+      }
+    };
+    xmlhttp.open("GET","search.php?q="+str,true);
+    xmlhttp.send();
+  }
+}
+</script>
 </head>
     <body>
+      
         
        <center><h1>CRUD controls</h1></center><br>
-       <form class="searchdata" method="POST" action="#">
-        <center><input type="text" name="query" placeholder="Enter search Keywords">
-        <button type="submit" name="Search">Search</button></center>
-      </form>
+       
+        <center><input type ="text" name="query" id="query" onkeyup="searchClient(query)" placeholder="Enter search Keywords">
+        <!--<button type="button" name="Search">Search</button></center>-->
+      
        
 
        <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12" id="txtHint">
                     <div class="mt-5 mb-3 clearfix">
                         <h2 class="pull-left">Client Details</h2>
                         <a href="form.html" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New Client</a>
@@ -88,7 +106,8 @@
                     mysqli_close($link);
                     ?>
                 </div>
-            </div>        
+            </div> 
+                   
         </div>
     </div>
     </body>
