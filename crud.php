@@ -22,7 +22,8 @@
         });
     </script>
     <script>
-function searchClient(str) {
+function searchClient() {
+  str= document.getElementById("query").value;  
   if (str == "") {
     document.getElementById("txtHint").innerHTML = "search query empty";
     return;
@@ -33,6 +34,7 @@ function searchClient(str) {
         document.getElementById("txtHint").innerHTML = this.responseText;
       }
     };
+    alert(str);
     xmlhttp.open("GET","search.php?q="+str,true);
     xmlhttp.send();
   }
@@ -43,8 +45,8 @@ function searchClient(str) {
       
         
        <center><h1>CRUD controls</h1></center><br>
-       
-        <center><input type ="text" name="query" id="query" onkeyup="searchClient(query)" placeholder="Enter search Keywords">
+        
+        <center><input type ="text" name="query" id="query" onkeyup="searchClient()" placeholder="Enter search Keywords">
         <!--<button type="button" name="Search">Search</button></center>-->
       
        
@@ -52,11 +54,12 @@ function searchClient(str) {
        <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12" id="txtHint">
+                <div class="col-md-12" >
                     <div class="mt-5 mb-3 clearfix">
                         <h2 class="pull-left">Client Details</h2>
                         <a href="form.html" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New Client</a>
                     </div>
+                    <div id="txtHint">
                     <?php
                     // Include config file
                     require_once "crudconfig.php";
@@ -105,6 +108,7 @@ function searchClient(str) {
                     // Close connection
                     mysqli_close($link);
                     ?>
+                    </div>
                 </div>
             </div> 
                    

@@ -37,7 +37,8 @@
                     $q = $_GET['q'];
                     
                     // Attempt select query execution
-                    $sql = "SELECT * FROM clientlog WHERE fname= '$q' OR lname= '$q' OR email= '$q' OR phno= '$q'";
+                    $sql = "SELECT * FROM clientlog WHERE fname LIKE '%$q%' OR lname LIKE '%$q%' OR email LIKE '%$q%' OR phno LIKE '%$q%'";
+                    echo $q;
                     if($result = mysqli_query($link, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo '<table class="table table-bordered table-striped">';
